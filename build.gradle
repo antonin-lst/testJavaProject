@@ -1,25 +1,33 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
     id 'java'
 }
 
-group 'fr.acore.test'
-version '0.0.1'
+group = 'fr.acore.test'
+version = '1.0-SNAPSHOT'
 
-
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
     maven {
-        name = "spigot"
-        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     }
     maven {
-        name = "sonatype"
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
     }
 }
 
 dependencies {
-    compile group: 'org.spigotmc', name: 'spigot-api', version: '1.8.8-R0.1-SNAPSHOT'
-    testCompile group: 'junit', name: 'junit', version: '4.10'
+    compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
 }

@@ -1,0 +1,6 @@
+name: Test
+version: @version@
+main: fr.acore.test.Test
+api-version: 1.16
+authors: [ azefgh456 ]
+description: A test Plugin
